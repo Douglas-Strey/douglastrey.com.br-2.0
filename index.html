@@ -26,10 +26,10 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list grid">
                     <li class="nav__item">
-                        <a href="#home" class="nav__link">
+                        <a href="#home" class="nav__link active-link">
                             <i class="uil uil-estate nav__icon"></i> Home
                         </a>
-                    </li>
+                    </li> 
 
                     <li class="nav__item">
                         <a href="#about" class="nav__link">
@@ -65,6 +65,9 @@
             </div>
 
             <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="uil uil-apps"></i>
                 </div>
@@ -419,7 +422,7 @@
                             </div>
 
                             <div>
-                                <h3 class="qualification__title">Software Enginner</h3>
+                                <h3 class="qualification__title">Software Engineering</h3>
                                 <span class="qualification__subtitle">Catholic University of Santa Catarina in
                                     Joinville, Brazil.</span>
                                 <div class="qualification__calendar">
@@ -608,25 +611,128 @@
         </section>
 
         <!--==================== TESTIMONIAL ====================-->
+
+        <!--
         <section class="testimonial section">
             <h2 class="section__title">Testimonial</h2>
+            <span class="section__subtitle"></span>
         </section>
+        -->
 
         <!--==================== CONTACT ME ====================-->
         <section class="contact section" id="contact">
+            <h2 class="section__title">Contact Me</h2>
+            <span class="section__subtitle">Get it touch</span>
 
+            <div class="contact__container container grid">
+                <div>
+                    <div class="contact__information">
+                        <i class="uil uil-phone contact__icon"></i>
 
+                        <div>
+                            <h3 class="contact__title">Call Me</h3>
+                            <span class="contact__subtitle">(47) 99783-8550</span>
+                        </div>
+                    </div>
+
+                    <div class="contact__information">
+                        <i class="uil uil-envelope contact__icon"></i>
+
+                        <div>
+                            <h3 class="contact__title">E-mail</h3>
+                            <span class="contact__subtitle">douglas.morini@hotmail.com</span>
+                        </div>
+                    </div>
+
+                    <div class="contact__information">
+                        <i class="uil uil-map-marker contact__icon"></i>
+
+                        <div>
+                            <h3 class="contact__title">Location</h3>
+                            <span class="contact__subtitle">Brasil - Garuva-SC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="https://formspree.io/f/xzbygydl" method="POST" class="contact__form grid">
+                    <div class="contact__inputs grid">
+                        <div class="contact__content">
+                            <label for="Name" class="contact__label">Name</label>
+                            <input type="text" name="Name" class="contact__input">
+                        </div>
+
+                        <div class="contact__content">
+                            <label for="E-mail" class="contact__label">E-mail</label>
+                            <input type="email" name="E-mail" class="contact__input">
+                        </div>
+                    </div>
+
+                    <div class="contact__content">
+                        <label for="Project" class="contact__label">Project</label>
+                        <input type="text" name="Project" class="contact__input">
+                    </div>
+
+                    <div class="contact__content">
+                        <label for="Message" class="contact__label">Message</label>
+                        <textarea name="Message" id="Message" cols="0" rows="7" class="contact__input"></textarea>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="button button--flex">
+                            Send Message
+                            <i class="uil uil-message button__icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </section>
     </main>
 
     <!--==================== FOOTER ====================-->
     <footer class="footer">
+        <div class="footer__bg">
+            <div class="footer__container container grid">
+                <div>
+                    <h1 class="footer__title">Douglas</h1>
+                    <span class="footer__subtitle">Future Software Engineer focused in Frontend Dev</span>
+                </div>
 
+                <ul class="footer__links">
+                    <li>
+                        <a href="#services" class="footer__link">Services</a>
+                    </li>
+                    <li>
+                        <a href="#portfolio" class="footer__link">Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="footer__link">Contact Me</a>
+                    </li>
+                </ul>
 
+                <div class="footer__socials">
+                    <a href="https://www.facebook.com/douglas.strey.16" target="_blank" class="footer__social">
+                        <i class="uil uil-facebook-f"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/douglas_strey/" target="_blank" class="footer__social">
+                        <i class="uil uil-instagram"></i>
+                    </a>
+
+                    <a href="https://t.me/douglas_strey" target="_blank" class="footer__social">
+                        <i class="uil uil-telegram-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <p class="footer__copy">&#169; Douglas Strey. All right reserved</p> 
+        </div>
     </footer>
 
     <!--==================== SCROLL TOP ====================-->
 
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="uil uil-arrow-up scrollup__icon"></i>
+    </a>
 
     <!--==================== SWIPER JS ====================-->
     <script src="js/swiper-bundle.min.js"></script>
