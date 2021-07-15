@@ -97,6 +97,18 @@ body.dark-theme {
   color: var(--first-color);
 }
 
+.translate-button {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  margin-right: var(--mb-1);
+  margin-left: var(--mb-0-5);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.translate-button:hover {
+  color: var(--first-color);
+}
+
 /*==================== BASE ====================*/
 
 * {
@@ -996,7 +1008,7 @@ header {
 /*==================== MEDIA QUERIES ====================*/
 /* For small devices */
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 375px) {
   .container {
     margin-left: var(--mb-1);
     margin-right: var(--mb-1);
@@ -1007,6 +1019,9 @@ header {
   }
   .nav__list {
     column-gap: 0;
+  }
+  .translate-button {
+    margin-left: 0;
   }
 
   .home__content {
