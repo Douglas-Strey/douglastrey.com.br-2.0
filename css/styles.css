@@ -522,13 +522,19 @@ header {
 }
 
 .skills__html {
-  width: 90%;
+  width: 96%;
 }
 .skills__css {
-  width: 80%;
+  width: 89%;
+}
+.skills__bootstrap {
+  width: 40%;
 }
 .skills__js {
-  width: 15%;
+  width: 25%;
+}
+.skills__jquery {
+  width: 10%;
 }
 .skills__react {
   width: 10%;
@@ -536,6 +542,9 @@ header {
 
 .skills__python {
   width: 12%;
+}
+.skills__php {
+  width: 8%;
 }
 
 .skills__figma {
@@ -1045,7 +1054,7 @@ header {
     justify-self: center;
   }
 
-  .about__container, 
+  .about__container,
   .skills__container,
   .portfolio__content,
   .project__container,
@@ -1055,7 +1064,7 @@ header {
   }
 
   .project__img {
-    margin-bottom: .005rem;
+    margin-bottom: 0.005rem;
   }
   .portfolio__img {
     margin-top: 3rem;
@@ -1156,7 +1165,7 @@ header {
     margin: 0 var(--mb-1);
   }
   .qualification__sections {
-    grid-template-columns: .5fr;
+    grid-template-columns: 0.5fr;
   }
 
   .services__container {
@@ -1167,7 +1176,7 @@ header {
     font-size: 2rem;
   }
   .services__content {
-     padding: 6rem 0 2rem 2.5rem ;
+    padding: 6rem 0 2rem 2.5rem;
   }
   .services__modal-content {
     width: 450px;
@@ -1195,7 +1204,7 @@ header {
     column-gap: 3rem;
   }
   .project__data {
-    padding-top: .8rem;
+    padding-top: 0.8rem;
   }
 
   .footer__container {
