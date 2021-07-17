@@ -5,7 +5,7 @@
   --header-height: 3rem;
 
   /*========== Colors ==========*/
-  --hue-color: 45;
+  --hue-color: 210;
 
   --first-color: hsl(var(--hue-color), 69%, 61%);
   --first-color-second: hsl(var(--hue-color), 69%, 61%);
@@ -927,7 +927,7 @@ header {
 .footer__links {
   display: flex;
   flex-direction: column;
-  row-gap: 1.5rem;
+  row-gap: 2rem;
 }
 
 .footer__link:hover {
@@ -947,7 +947,7 @@ header {
 .footer__copy {
   font-size: var(--smaller-font-size);
   text-align: center;
-  color: var(--text-color-light);
+  color: #fff;
   margin-top: var(--mb-3);
 }
 
