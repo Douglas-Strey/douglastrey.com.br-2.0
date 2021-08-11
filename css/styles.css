@@ -556,7 +556,10 @@ header {
   width: 12%;
 }
 .skills__php {
-  width: 8%;
+  width: 63%;
+}
+.skills__node-js {
+  width: 0%;
 }
 
 .skills__figma {
