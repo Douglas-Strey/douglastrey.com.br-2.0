@@ -558,6 +558,9 @@ header {
 .skills__php {
   width: 78%;
 }
+.skills__my-sql {
+  width: 48%;
+}
 .skills__node-js {
   width: 0%;
 }
