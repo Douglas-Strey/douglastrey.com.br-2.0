@@ -534,22 +534,22 @@ header {
 }
 
 .skills__html {
-  width: 96%;
+  width: 98%;
 }
 .skills__css {
-  width: 89%;
+  width: 93%;
 }
 .skills__bootstrap {
-  width: 40%;
+  width: 78%;
 }
 .skills__js {
-  width: 25%;
+  width: 65%;
 }
 .skills__jquery {
-  width: 10%;
+  width: 65%;
 }
-.skills__react {
-  width: 10%;
+.skills__react-js {
+  width: 15%;
 }
 
 .skills__python {
