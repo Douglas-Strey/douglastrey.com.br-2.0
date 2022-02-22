@@ -556,13 +556,16 @@ header {
   width: 12%;
 }
 .skills__php {
-  width: 78%;
+  width: 96%;
 }
 .skills__my-sql {
-  width: 48%;
+  width: 80%;
+}
+.skills__oracle {
+  width: 45%;
 }
 .skills__node-js {
-  width: 0%;
+  width: 40%;
 }
 
 .skills__figma {
