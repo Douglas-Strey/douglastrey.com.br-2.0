@@ -534,22 +534,22 @@ header {
 }
 
 .skills__html {
-  width: 98%;
+  width: 100%;
 }
 .skills__css {
-  width: 93%;
+  width: 100%;
 }
 .skills__bootstrap {
-  width: 78%;
+  width: 100%;
 }
 .skills__js {
-  width: 65%;
+  width: 95%;
 }
 .skills__jquery {
-  width: 65%;
+  width: 95%;
 }
 .skills__react-js {
-  width: 15%;
+  width: 30%;
 }
 
 .skills__python {
@@ -558,14 +558,11 @@ header {
 .skills__php {
   width: 96%;
 }
+.skills__oracle {
+  width: 90%;
+}
 .skills__my-sql {
   width: 80%;
-}
-.skills__oracle {
-  width: 45%;
-}
-.skills__node-js {
-  width: 40%;
 }
 
 .skills__figma {
@@ -705,6 +702,23 @@ header {
 
 .services__button:hover .button__icon {
   transform: translateX(0.25rem);
+}
+
+#bmf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  z-index: var(--z-modal);
+  opacity: 0;
+  visibility: visible;
+  transition: 0.3s;
 }
 
 .services__modal {
