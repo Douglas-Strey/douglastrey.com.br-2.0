@@ -3,6 +3,7 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   CheckCircle2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   GraduationCap,
@@ -45,6 +46,12 @@ type VisionMode =
 const languageStorageKey = "douglas-site-language";
 const themeStorageKey = "douglas-site-theme";
 const visionStorageKey = "douglas-site-vision";
+
+function getInitialOpenExperienceItems(language: Language) {
+  return siteContent[language].experience.items
+    .map((item, index) => (("current" in item && item.current) ? `current-${index}` : null))
+    .filter((item): item is string => item !== null);
+}
 
 function getPreferredLanguage(): Language {
   if (typeof window === "undefined") {
@@ -95,6 +102,10 @@ export default function App() {
   const [expandedProject, setExpandedProject] = useState<null | { title: string; images: string[]; index: number }>(null);
   const [isLightboxClosing, setIsLightboxClosing] = useState(false);
   const [lightboxZoom, setLightboxZoom] = useState(1);
+  const [openExperienceItems, setOpenExperienceItems] = useState<string[]>(() =>
+    getInitialOpenExperienceItems(getPreferredLanguage()),
+  );
+  const [previousExperienceOpen, setPreviousExperienceOpen] = useState(false);
   const pinchDistanceRef = useRef<number | null>(null);
   const pinchZoomRef = useRef(1);
   const swipeStartXRef = useRef<number | null>(null);
@@ -334,6 +345,97 @@ export default function App() {
   );
 
   const visionLabels = copy.accessibility;
+  const experienceActionLabel = language === "pt-BR"
+    ? { open: "Detalhes", close: "Recolher" }
+    : { open: "Details", close: "Collapse" };
+  const previousExperienceLabel = language === "pt-BR"
+    ? { title: "Cargos anteriores", description: "Abra para ver o histórico completo." }
+    : { title: "Previous roles", description: "Open to view the full history." };
+  const currentExperienceItems = copy.experience.items.filter((item) => "current" in item && item.current);
+  const previousExperienceItems = copy.experience.items.filter((item) => !("current" in item && item.current));
+
+  const toggleExperienceItem = (itemKey: string) => {
+    setOpenExperienceItems((current) =>
+      current.includes(itemKey)
+        ? current.filter((key) => key !== itemKey)
+        : [...current, itemKey],
+    );
+  };
+
+  const renderExperienceCard = (item: (typeof copy.experience.items)[number], itemKey: string) => {
+    const isCurrent = "current" in item && item.current;
+    const isOpen = openExperienceItems.includes(itemKey);
+
+    return (
+      <Card
+        key={itemKey}
+        className={cn("group", isCurrent && "border-primary/35 bg-[linear-gradient(180deg,hsl(var(--card))/0.88,transparent),linear-gradient(135deg,hsl(var(--primary))/0.08,transparent_55%)]")}
+      >
+        <CardContent className="p-5 sm:p-7">
+          <div className="flex items-start gap-4">
+            <div className="rounded-full border border-border/70 bg-background/80 p-3 text-primary">
+              <BriefcaseBusiness className="size-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant={isCurrent ? "default" : "secondary"}>{item.period}</Badge>
+                {isCurrent ? (
+                  <Badge variant="outline" className="gap-1.5">
+                    <CheckCircle2 className="size-3.5" />
+                    {copy.accessibility.currentLabel}
+                  </Badge>
+                ) : null}
+              </div>
+              <div className="mt-3 space-y-1">
+                <h3 className="font-display text-xl tracking-tight text-foreground sm:text-2xl">
+                  {item.title}
+                </h3>
+                <p className="text-sm font-medium uppercase tracking-[0.16em] text-primary">
+                  {item.company}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-center justify-end gap-3 border-t border-border/50 pt-4">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="shrink-0 rounded-full px-3"
+              onClick={() => toggleExperienceItem(itemKey)}
+              aria-expanded={isOpen}
+              aria-controls={`experience-panel-${itemKey}`}
+            >
+              {isOpen ? experienceActionLabel.close : experienceActionLabel.open}
+              <ChevronDown
+                className={cn(
+                  "size-4 transition-transform duration-200",
+                  isOpen && "rotate-180",
+                )}
+              />
+            </Button>
+          </div>
+
+          <div
+            id={`experience-panel-${itemKey}`}
+            className={cn(
+              "grid transition-all duration-300 ease-out",
+              isOpen ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+            )}
+          >
+            <div className="overflow-hidden">
+              <div className="rounded-3xl border border-border/60 bg-background/45 p-4">
+                <p className="text-sm leading-6 text-muted-foreground sm:leading-7">
+                  {item.summary}
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
@@ -644,44 +746,57 @@ export default function App() {
             description={copy.experience.description}
           />
 
-          <div className="mt-8 grid gap-4 lg:mt-10 lg:gap-5 lg:grid-cols-2">
-            {copy.experience.items.map((item) => {
-              const isCurrent = "current" in item && item.current;
+          <div className="mt-8 space-y-5 lg:mt-10">
+            <div className="grid gap-4 lg:gap-5 lg:grid-cols-2">
+              {currentExperienceItems.map((item, index) =>
+                renderExperienceCard(item, `current-${index}`),
+              )}
+            </div>
 
-              return (
-              <Card
-                key={`${item.title}-${item.period}`}
-                className={cn("group", isCurrent && "border-primary/35 bg-[linear-gradient(180deg,hsl(var(--card))/0.88,transparent),linear-gradient(135deg,hsl(var(--primary))/0.08,transparent_55%)]")}
-              >
-                <CardContent className="p-5 sm:p-7">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-3">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant={isCurrent ? "default" : "secondary"}>{item.period}</Badge>
-                        {isCurrent ? (
-                          <Badge variant="outline" className="gap-1.5">
-                            <CheckCircle2 className="size-3.5" />
-                            {copy.accessibility.currentLabel}
-                          </Badge>
-                        ) : null}
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-display text-xl tracking-tight text-foreground sm:text-2xl">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm font-medium uppercase tracking-[0.16em] text-primary">
-                          {item.company}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="rounded-full border border-border/70 bg-background/80 p-3 text-primary">
-                      <BriefcaseBusiness className="size-5" />
+            <Card className="overflow-hidden">
+              <CardContent className="p-5 sm:p-6">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between gap-4 text-left"
+                  onClick={() => setPreviousExperienceOpen((current) => !current)}
+                  aria-expanded={previousExperienceOpen}
+                  aria-controls="previous-experience-panel"
+                >
+                  <div className="space-y-1">
+                    <p className="font-display text-xl tracking-tight text-foreground">
+                      {previousExperienceLabel.title}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {previousExperienceLabel.description}
+                    </p>
+                  </div>
+                  <div className="rounded-full border border-border/70 bg-background/70 p-3 text-primary">
+                    <ChevronDown
+                      className={cn(
+                        "size-5 transition-transform duration-200",
+                        previousExperienceOpen && "rotate-180",
+                      )}
+                    />
+                  </div>
+                </button>
+
+                <div
+                  id="previous-experience-panel"
+                  className={cn(
+                    "grid transition-all duration-300 ease-out",
+                    previousExperienceOpen ? "mt-5 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="grid gap-4 lg:gap-5 lg:grid-cols-2">
+                      {previousExperienceItems.map((item, index) =>
+                        renderExperienceCard(item, `previous-${index}`),
+                      )}
                     </div>
                   </div>
-                  <p className="mt-4 text-sm leading-6 text-muted-foreground sm:mt-5 sm:leading-7">{item.summary}</p>
-                </CardContent>
-              </Card>
-            )})}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 

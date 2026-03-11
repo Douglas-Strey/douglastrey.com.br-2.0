@@ -223,6 +223,26 @@
   *::-webkit-scrollbar-corner {
     background: transparent;
   }
+
+  .textarea-brand {
+    resize: vertical;
+  }
+
+  .textarea-brand::-webkit-resizer {
+    background:
+      linear-gradient(
+        135deg,
+        transparent 0 54%,
+        hsl(var(--primary) / 0.65) 54% 66%,
+        transparent 66% 100%
+      ),
+      linear-gradient(
+        135deg,
+        transparent 0 72%,
+        hsl(var(--accent) / 0.55) 72% 82%,
+        transparent 82% 100%
+      );
+  }
 }
 
 @layer utilities {
