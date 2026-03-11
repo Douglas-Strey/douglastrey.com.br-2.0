@@ -63,6 +63,118 @@
   --ring: 186 72% 52%;
 }
 
+.vision-deuteranopia {
+  --primary: 221 86% 43%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 41 100% 52%;
+  --accent-foreground: 214 40% 10%;
+  --secondary: 40 38% 90%;
+  --secondary-foreground: 214 38% 16%;
+  --muted: 40 24% 88%;
+  --muted-foreground: 216 18% 28%;
+  --border: 216 20% 72%;
+  --input: 216 20% 72%;
+  --ring: 221 86% 43%;
+}
+
+.dark.vision-deuteranopia {
+  --primary: 210 96% 64%;
+  --primary-foreground: 214 42% 10%;
+  --accent: 45 100% 58%;
+  --accent-foreground: 214 42% 10%;
+  --secondary: 214 24% 22%;
+  --secondary-foreground: 40 20% 94%;
+  --muted: 214 20% 18%;
+  --muted-foreground: 42 14% 78%;
+  --border: 214 20% 30%;
+  --input: 214 20% 30%;
+  --ring: 210 96% 64%;
+}
+
+.vision-protanopia {
+  --primary: 224 82% 44%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 47 100% 50%;
+  --accent-foreground: 214 40% 10%;
+  --secondary: 39 34% 91%;
+  --secondary-foreground: 214 34% 16%;
+  --muted: 38 24% 88%;
+  --muted-foreground: 215 16% 30%;
+  --border: 220 18% 74%;
+  --input: 220 18% 74%;
+  --ring: 224 82% 44%;
+}
+
+.dark.vision-protanopia {
+  --primary: 213 94% 66%;
+  --primary-foreground: 214 42% 10%;
+  --accent: 48 100% 60%;
+  --accent-foreground: 214 42% 10%;
+  --secondary: 214 24% 22%;
+  --secondary-foreground: 40 20% 94%;
+  --muted: 214 20% 18%;
+  --muted-foreground: 40 14% 79%;
+  --border: 214 20% 30%;
+  --input: 214 20% 30%;
+  --ring: 213 94% 66%;
+}
+
+.vision-tritanopia {
+  --primary: 339 82% 42%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 24 98% 56%;
+  --accent-foreground: 214 40% 10%;
+  --secondary: 18 36% 91%;
+  --secondary-foreground: 214 34% 16%;
+  --muted: 22 22% 88%;
+  --muted-foreground: 215 16% 30%;
+  --border: 12 20% 74%;
+  --input: 12 20% 74%;
+  --ring: 339 82% 42%;
+}
+
+.dark.vision-tritanopia {
+  --primary: 333 90% 68%;
+  --primary-foreground: 214 42% 10%;
+  --accent: 28 100% 62%;
+  --accent-foreground: 214 42% 10%;
+  --secondary: 214 24% 22%;
+  --secondary-foreground: 40 20% 94%;
+  --muted: 214 20% 18%;
+  --muted-foreground: 40 14% 79%;
+  --border: 214 20% 30%;
+  --input: 214 20% 30%;
+  --ring: 333 90% 68%;
+}
+
+.vision-monochromacy {
+  --primary: 0 0% 18%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 0 0% 34%;
+  --accent-foreground: 0 0% 100%;
+  --secondary: 0 0% 88%;
+  --secondary-foreground: 0 0% 14%;
+  --muted: 0 0% 92%;
+  --muted-foreground: 0 0% 28%;
+  --border: 0 0% 74%;
+  --input: 0 0% 74%;
+  --ring: 0 0% 18%;
+}
+
+.dark.vision-monochromacy {
+  --primary: 0 0% 88%;
+  --primary-foreground: 0 0% 10%;
+  --accent: 0 0% 66%;
+  --accent-foreground: 0 0% 10%;
+  --secondary: 0 0% 20%;
+  --secondary-foreground: 0 0% 94%;
+  --muted: 0 0% 16%;
+  --muted-foreground: 0 0% 76%;
+  --border: 0 0% 28%;
+  --input: 0 0% 28%;
+  --ring: 0 0% 88%;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -70,6 +182,8 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-color: hsl(var(--primary) / 0.45) hsl(var(--muted) / 0.16);
+    scrollbar-width: thin;
   }
 
   body {
@@ -81,6 +195,33 @@
 
   a {
     @apply outline-none;
+  }
+
+  select {
+    color-scheme: inherit;
+  }
+
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.1);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border: 2px solid hsl(var(--background));
+    border-radius: 999px;
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.68);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 

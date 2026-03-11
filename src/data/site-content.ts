@@ -10,6 +10,19 @@ export const siteContent = {
       stack: "Stack",
       contact: "Contato",
     },
+    accessibility: {
+      title: "Acessibilidade de cor",
+      currentLabel: "Atuação atual",
+      publicProjectLabel: "Projeto público",
+      privateProjectLabel: "Projeto interno",
+      options: [
+        { label: "Padrão", value: "default" },
+        { label: "Deuteranopia", value: "deuteranopia" },
+        { label: "Protanopia", value: "protanopia" },
+        { label: "Tritanopia", value: "tritanopia" },
+        { label: "Monocromacia", value: "monochromacy" },
+      ],
+    },
     hero: {
       badge: "Portfólio 2026",
       title: "Lidero times e desenvolvo soluções full-stack para produtos digitais, integrações e operações críticas.",
@@ -337,6 +350,19 @@ export const siteContent = {
       projects: "Projects",
       stack: "Stack",
       contact: "Contact",
+    },
+    accessibility: {
+      title: "Color accessibility",
+      currentLabel: "Current role",
+      publicProjectLabel: "Public project",
+      privateProjectLabel: "Internal project",
+      options: [
+        { label: "Default", value: "default" },
+        { label: "Deuteranopia", value: "deuteranopia" },
+        { label: "Protanopia", value: "protanopia" },
+        { label: "Tritanopia", value: "tritanopia" },
+        { label: "Monochromacy", value: "monochromacy" },
+      ],
     },
     hero: {
       badge: "Portfolio 2026",
