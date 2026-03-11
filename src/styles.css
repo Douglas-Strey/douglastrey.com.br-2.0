@@ -182,6 +182,8 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-color: hsl(var(--primary) / 0.45) hsl(var(--muted) / 0.16);
+    scrollbar-width: thin;
   }
 
   body {
@@ -197,6 +199,29 @@
 
   select {
     color-scheme: inherit;
+  }
+
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.1);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border: 2px solid hsl(var(--background));
+    border-radius: 999px;
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.68);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 

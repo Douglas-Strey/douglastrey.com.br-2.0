@@ -321,7 +321,7 @@ export default function App() {
             Douglas<span className="text-primary">.</span>
           </a>
 
-          <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-6 text-sm text-muted-foreground xl:flex">
             {navigation.map((item) => (
               <a key={item.href} href={item.href} className="transition-colors hover:text-foreground">
                 {item.label}
@@ -330,7 +330,7 @@ export default function App() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-3 md:flex">
+            <div className="hidden items-center gap-3 xl:flex">
               <VisionToggle value={visionMode} onChange={setVisionMode} labels={visionLabels} />
               <LanguageToggle value={language} onChange={setLanguage} />
               <ThemeToggle value={theme} onChange={setTheme} />
@@ -339,7 +339,7 @@ export default function App() {
               type="button"
               variant="outline"
               size="icon"
-              className="md:hidden"
+              className="xl:hidden"
               onClick={openMobileMenu}
               aria-label="Abrir menu"
             >
@@ -352,7 +352,7 @@ export default function App() {
       {mobileMenuOpen ? (
         <div
           className={cn(
-            "fixed inset-0 z-[90] transition-all duration-200 md:hidden",
+            "fixed inset-0 z-[90] transition-all duration-200 xl:hidden",
             isMobileMenuVisible
               ? "bg-background/86 opacity-100 backdrop-blur-xl"
               : "bg-background/0 opacity-0 backdrop-blur-none",
@@ -361,7 +361,7 @@ export default function App() {
         >
           <div
             className={cn(
-              "ml-auto flex h-full w-[min(90vw,23rem)] flex-col border-l border-white/10 bg-[linear-gradient(180deg,hsl(var(--card))/0.98,transparent),linear-gradient(155deg,hsl(var(--primary))/0.1,transparent_52%),linear-gradient(180deg,hsl(var(--accent))/0.12,transparent_68%)] px-6 py-6 shadow-2xl transition-all duration-300 ease-out",
+              "ml-auto flex h-full w-[min(90vw,23rem)] flex-col overflow-y-auto border-l border-white/10 bg-[linear-gradient(180deg,hsl(var(--card))/0.98,transparent),linear-gradient(155deg,hsl(var(--primary))/0.1,transparent_52%),linear-gradient(180deg,hsl(var(--accent))/0.12,transparent_68%)] px-6 py-6 shadow-2xl transition-all duration-300 ease-out",
               isMobileMenuVisible
                 ? "translate-x-0 opacity-100"
                 : "translate-x-8 opacity-0",
@@ -401,35 +401,39 @@ export default function App() {
               ))}
             </nav>
 
-            <div className="mt-6 grid gap-4 rounded-[1.6rem] border border-white/10 bg-background/72 p-4">
-              <div className="space-y-2">
+            <div className="mt-7 rounded-[1.6rem] border border-white/10 bg-background/72 p-5">
+              <div className="grid gap-5">
+                <div className="space-y-2.5">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {visionLabels.title}
                 </p>
                 <VisionToggle value={visionMode} onChange={setVisionMode} labels={visionLabels} />
               </div>
-              <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Idioma
-                </p>
-                <LanguageToggle value={language} onChange={setLanguage} />
-              </div>
-              <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Tema
-                </p>
-                <ThemeToggle value={theme} onChange={setTheme} />
+                <div className="grid gap-4">
+                  <div className="space-y-2.5">
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      Idioma
+                    </p>
+                    <LanguageToggle value={language} onChange={setLanguage} />
+                  </div>
+                  <div className="space-y-2.5">
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      Tema
+                    </p>
+                    <ThemeToggle value={theme} onChange={setTheme} />
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="mt-auto space-y-3 pt-6">
+            <div className="mt-6 border-t border-white/10 pt-8">
               <Button asChild size="lg" className="w-full" onClick={closeMobileMenu}>
                 <a href="#contact">
                   {copy.hero.primaryCta}
                   <ArrowRight className="size-4" />
                 </a>
               </Button>
-              <Button asChild size="lg" variant="outline" className="w-full" onClick={closeMobileMenu}>
+              <Button asChild size="lg" variant="outline" className="mt-3 w-full" onClick={closeMobileMenu}>
                 <a
                   href="https://www.linkedin.com/in/douglas-strey/"
                   target="_blank"

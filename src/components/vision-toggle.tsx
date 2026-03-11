@@ -21,7 +21,7 @@ type VisionToggleProps = {
 
 export function VisionToggle({ value, onChange, labels }: VisionToggleProps) {
   return (
-    <label className="inline-flex items-center gap-3 rounded-full border border-border/70 bg-background/70 px-3 py-1.5 backdrop-blur">
+    <label className="inline-flex min-h-11 w-full items-center gap-3 rounded-full border border-border/70 bg-background/70 px-3.5 py-1 backdrop-blur">
       <span className="text-muted-foreground" aria-hidden="true">
         <Accessibility className="size-4" />
       </span>
@@ -30,7 +30,7 @@ export function VisionToggle({ value, onChange, labels }: VisionToggleProps) {
         value={value}
         onChange={(event) => onChange(event.target.value as VisionMode)}
         aria-label={labels.title}
-        className="min-w-0 bg-transparent text-sm font-medium text-foreground outline-none"
+        className="h-9 min-w-0 flex-1 bg-transparent pr-1 text-sm font-medium text-foreground outline-none"
       >
         {labels.options.map((option) => (
           <option key={option.value} value={option.value}>
