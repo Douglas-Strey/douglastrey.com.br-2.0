@@ -98,6 +98,8 @@ export default function App() {
   const pinchDistanceRef = useRef<number | null>(null);
   const pinchZoomRef = useRef(1);
   const swipeStartXRef = useRef<number | null>(null);
+  const heroPhotoClickCountRef = useRef(0);
+  const heroPhotoClickTimeoutRef = useRef<number | null>(null);
   const copy = siteContent[language];
 
   useEffect(() => {
@@ -147,10 +149,37 @@ export default function App() {
     };
   }, [expandedProject, mobileMenuOpen]);
 
+  useEffect(() => {
+    return () => {
+      if (heroPhotoClickTimeoutRef.current) {
+        window.clearTimeout(heroPhotoClickTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const openProjectImage = (title: string, images: readonly string[], index = 0) => {
     setIsLightboxClosing(false);
     setLightboxZoom(1);
     setExpandedProject({ title, images: [...images], index });
+  };
+
+  const handleHeroPhotoClick = () => {
+    heroPhotoClickCountRef.current += 1;
+
+    if (heroPhotoClickTimeoutRef.current) {
+      window.clearTimeout(heroPhotoClickTimeoutRef.current);
+    }
+
+    if (heroPhotoClickCountRef.current === 3) {
+      heroPhotoClickCountRef.current = 0;
+      openProjectImage("Galo", ["/img/galo.jpeg"]);
+      return;
+    }
+
+    heroPhotoClickTimeoutRef.current = window.setTimeout(() => {
+      heroPhotoClickCountRef.current = 0;
+      heroPhotoClickTimeoutRef.current = null;
+    }, 320);
   };
 
   const closeProjectImage = () => {
@@ -493,13 +522,18 @@ export default function App() {
             <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,hsl(var(--primary))/0.22,transparent_70%)]" />
             <CardContent className="relative p-6 sm:p-8">
               <div className="grid gap-6">
-                <div className="overflow-hidden rounded-[28px] border border-white/10 bg-black/10">
+                <button
+                  type="button"
+                  className="overflow-hidden rounded-[28px] border border-white/10 bg-black/10 text-left"
+                  onClick={handleHeroPhotoClick}
+                  aria-label="Foto de Douglas Strey"
+                >
                   <img
                     src="/img/perfil-2.jpg"
                     alt="Douglas Strey"
                     className="aspect-[4/4.7] w-full object-cover object-top"
                   />
-                </div>
+                </button>
 
                 <div className="grid gap-3 sm:grid-cols-2">
                   {[
