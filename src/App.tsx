@@ -2,10 +2,13 @@ import { useEffect, useMemo, useRef, useState, type TouchEvent } from "react";
 import {
   ArrowRight,
   BriefcaseBusiness,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   GraduationCap,
   ExternalLink,
+  FolderLock,
+  Globe2,
   Github,
   Instagram,
   Linkedin,
@@ -22,6 +25,7 @@ import {
 import { LanguageToggle } from "@/components/language-toggle";
 import { SectionHeading } from "@/components/section-heading";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { VisionToggle } from "@/components/vision-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,9 +35,16 @@ import { siteContent, type Language } from "@/data/site-content";
 import { cn } from "@/lib/utils";
 
 type Theme = "system" | "light" | "dark";
+type VisionMode =
+  | "default"
+  | "deuteranopia"
+  | "protanopia"
+  | "tritanopia"
+  | "monochromacy";
 
 const languageStorageKey = "douglas-site-language";
 const themeStorageKey = "douglas-site-theme";
+const visionStorageKey = "douglas-site-vision";
 
 function getPreferredLanguage(): Language {
   if (typeof window === "undefined") {
@@ -61,9 +72,24 @@ function resolveSystemTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function getPreferredVisionMode(): VisionMode {
+  if (typeof window === "undefined") {
+    return "default";
+  }
+
+  const saved = window.localStorage.getItem(visionStorageKey);
+  return saved === "deuteranopia" ||
+    saved === "protanopia" ||
+    saved === "tritanopia" ||
+    saved === "monochromacy"
+    ? saved
+    : "default";
+}
+
 export default function App() {
   const [language, setLanguage] = useState<Language>(() => getPreferredLanguage());
   const [theme, setTheme] = useState<Theme>(() => getPreferredTheme());
+  const [visionMode, setVisionMode] = useState<VisionMode>(() => getPreferredVisionMode());
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
   const [expandedProject, setExpandedProject] = useState<null | { title: string; images: string[]; index: number }>(null);
@@ -94,6 +120,20 @@ export default function App() {
 
     return () => media.removeEventListener("change", syncTheme);
   }, [theme]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove(
+      "vision-deuteranopia",
+      "vision-protanopia",
+      "vision-tritanopia",
+      "vision-monochromacy",
+    );
+    if (visionMode !== "default") {
+      root.classList.add(`vision-${visionMode}`);
+    }
+    window.localStorage.setItem(visionStorageKey, visionMode);
+  }, [visionMode]);
 
   useEffect(() => {
     if (!mobileMenuOpen && !expandedProject) {
@@ -264,6 +304,8 @@ export default function App() {
     [copy.nav],
   );
 
+  const visionLabels = copy.accessibility;
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -289,6 +331,7 @@ export default function App() {
 
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-3 md:flex">
+              <VisionToggle value={visionMode} onChange={setVisionMode} labels={visionLabels} />
               <LanguageToggle value={language} onChange={setLanguage} />
               <ThemeToggle value={theme} onChange={setTheme} />
             </div>
@@ -359,6 +402,12 @@ export default function App() {
             </nav>
 
             <div className="mt-6 grid gap-4 rounded-[1.6rem] border border-white/10 bg-background/72 p-4">
+              <div className="space-y-2">
+                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {visionLabels.title}
+                </p>
+                <VisionToggle value={visionMode} onChange={setVisionMode} labels={visionLabels} />
+              </div>
               <div className="space-y-2">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   Idioma
@@ -569,7 +618,15 @@ export default function App() {
                 <CardContent className="p-5 sm:p-7">
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-3">
-                      <Badge variant={isCurrent ? "default" : "secondary"}>{item.period}</Badge>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge variant={isCurrent ? "default" : "secondary"}>{item.period}</Badge>
+                        {isCurrent ? (
+                          <Badge variant="outline" className="gap-1.5">
+                            <CheckCircle2 className="size-3.5" />
+                            {copy.accessibility.currentLabel}
+                          </Badge>
+                        ) : null}
+                      </div>
                       <div className="space-y-1">
                         <h3 className="font-display text-xl tracking-tight text-foreground sm:text-2xl">
                           {item.title}
@@ -679,7 +736,13 @@ export default function App() {
                   />
                 </button>
                 <CardHeader className="p-5 pb-2 sm:p-6 sm:pb-2">
-                  <CardDescription>{project.status}</CardDescription>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="outline" className="gap-1.5">
+                      {project.href ? <Globe2 className="size-3.5" /> : <FolderLock className="size-3.5" />}
+                      {project.href ? copy.accessibility.publicProjectLabel : copy.accessibility.privateProjectLabel}
+                    </Badge>
+                    <CardDescription>{project.status}</CardDescription>
+                  </div>
                   <CardTitle>{project.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 p-5 pt-0 sm:space-y-5 sm:p-6 sm:pt-0">
