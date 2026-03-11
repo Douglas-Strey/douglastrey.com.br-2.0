@@ -1,28 +1,31 @@
-## Website have the english for the first language.
+# Douglas Strey Portfolio
 
-<p align="center">
- <img src="./assets/img/readme-img-en.png" alt="template"  width="700px"/>
-</p>
+Portfólio pessoal reconstruído com uma base moderna em React.
 
-## E a possui opção para mudar para português do Brasil.
+## Stack
 
-<p align="center">
- <img src="./assets/img/readme-img-pt_br.png" alt="template"  width="700px"/>
-</p>
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+- componentes no padrão `shadcn/ui`
 
-## 🚀 Tecnologias
+## Recursos
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+- conteúdo centralizado para `pt-BR` e `en`
+- troca de idioma sem páginas duplicadas
+- tema `light`, `dark` e `system` com persistência
+- layout reformulado com foco mais profissional
+- timeline de experiência e projetos em dados estruturados
 
-- HTML;
-- CSS;
-- JavaScript;
+## Scripts
 
-## 💻 Projeto
+```bash
+npm install
+npm run dev
+```
 
-Projeto com o objetivo da criação de um site para ser utilizado como portfólio pessoal,
-nele estarei postando meus trabalhos já realizados, locais que já trabalhei, locais que estudei e estudo, habilidades, etc.
-
-## 🔖 Layout
-
-Você pode visualizar o layout do projeto através [desse link](https://douglastrey.com/).
+```bash
+npm run build
+npm run preview
+```
